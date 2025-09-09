@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^%q2ynu)(+-^%pj@^yo&zo76=aog#e$=62e*dej_y^%9@4u=))'
-POSTGRES_DB = environ.get('POSTGRES_DB')
+POSTGRES_DB = environ.get('POSTGRES_DB_NAME')
 POSTGRES_USER = environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = environ.get('POSTGRES_PASSWORD')
 POSTGRES_PORT = environ.get('POSTGRES_PORT')
