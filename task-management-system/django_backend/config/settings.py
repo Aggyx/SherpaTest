@@ -20,16 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^%q2ynu)(+-^%pj@^yo&zo76=aog#e$=62e*dej_y^%9@4u=))'
-POSTGRES_DB = environ.get('POSTGRES_DB_NAME')
+SECRET_KEY = environ.get('SECRET_KEY')
+POSTGRES_DB_NAME = environ.get('POSTGRES_DB_NAME')
 POSTGRES_USER = environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = environ.get('POSTGRES_PASSWORD')
 POSTGRES_PORT = environ.get('POSTGRES_PORT')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ.get('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = environ.get('DJANGO_ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ALLOWED_HOSTS
 
 
 # Application definition
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': POSTGRES_DB or 'task_management_db',
+        'NAME': POSTGRES_DB_NAME or 'task_management_db',
         'USER': POSTGRES_USER or 'postgres',
         'PASSWORD': POSTGRES_PASSWORD or 'postgres123',
         'HOST': 'database_postgres', #IP o nombre del contenedor
