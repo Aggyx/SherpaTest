@@ -24,14 +24,12 @@ SECRET_KEY = 'django-insecure-^%q2ynu)(+-^%pj@^yo&zo76=aog#e$=62e*dej_y^%9@4u=))
 POSTGRES_DB = environ.get('POSTGRES_DB')
 POSTGRES_USER = environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = environ.get('POSTGRES_PASSWORD')
-POSTGRES_HOST = environ.get('POSTGRES_HOST')
 POSTGRES_PORT = environ.get('POSTGRES_PORT')
-DJANGO_PORT = environ.get('DJANGO_PORT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -60,9 +60,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['templates'],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -79,11 +80,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': POSTGRES_DB,
-        'USER': POSTGRES_USER,
-        'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': POSTGRES_HOST, #IP o nombre del contenedor
-        'PORT': POSTGRES_PORT,
+        'NAME': POSTGRES_DB or 'task_management_db',
+        'USER': POSTGRES_USER or 'postgres',
+        'PASSWORD': POSTGRES_PASSWORD or 'postgres123',
+        'HOST': 'database_postgres', #IP o nombre del contenedor
+        'PORT': POSTGRES_PORT or '5432',
+        'OPTIONS': {
+            'connect_timeout': 10,
+        }
     }
 }
 
@@ -127,3 +131,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 86400  # 24 hours
+SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_HTTPONLY = True

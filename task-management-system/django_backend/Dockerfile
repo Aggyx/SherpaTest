@@ -13,9 +13,11 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Runtime stage, cuando se ejecuta la imagen
+# Runtime stage, justo antes de ejecutar la imagen
 FROM python:3.11-slim AS runtime
-    
+
+# Instalar cliente PostgreSQL
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Creo un usuario no root para seguridad ya que en la imagen base es root
 RUN groupadd -r django && useradd -r -g django django
