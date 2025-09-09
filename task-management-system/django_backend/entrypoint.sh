@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Esperar a que la base de datos esté lista usando herramientas de Django
+# !! WARNING en --deploy, à seguir en produción.
 # El operador ! invierte el resultado del comando:
 # - Si manage.py check falla (exit code != 0), ! lo convierte en true, continúa el loop
 # - Si manage.py check tiene éxito (exit code == 0), ! lo convierte en false, sale del loop
 echo "Waiting for database to be ready..."
-while ! python3 manage.py check --database default --deploy >/dev/null 2>&1; do
+while ! python3 manage.py check --database default; do
     echo "Base de datos no disponible - esperando 2 segundos..."
     sleep 2
 done

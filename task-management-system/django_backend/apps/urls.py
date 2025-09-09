@@ -1,6 +1,6 @@
 from django.urls import path
-from .views.users.UserView import UserCreate, UserList, UserRetrieveUpdate
-from .views.auth.AuthView import login_view, logout_view, refresh_view, me_view
+from .users.UserView import UserCreate, UserList, UserRetrieveUpdate
+from .users.AuthView import login_view, logout_view, refresh_view, me_view
 
 urlpatterns = [
     # User management endpoints

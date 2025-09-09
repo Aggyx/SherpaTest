@@ -6,10 +6,13 @@ Recibiendo el mail en español voy a documentar el proyecto en Castellano.
 -   Multi-stage Dockerfile permite dar instruciones en differentes partes  del proceso de levantar la máquina virtual.
 -   REST Endpoints y Modelos (minimo indispensable)
 -   Frontend con Templates de Django. (minimo indispensable)
-
+-   Comprobaciones de estado de los servicios, essencial para asegurar desplieges funcionales
+-   Logging. Muy util para seguir trabajando conociendo el problema.
+-   templates, User Friendly :)
+ 
 **Funciones no realizadas y porqué ?**
 -   Celery, desconozco y por tiempo voy a dejar lo principal funcionando.
-
+-   Logging. Un error en el parseo de Logging en settings.py
 **Gestión del tiempo ?**
     Tras leer detenidamente el enunciado voy a seguir el timeline recomendado pero en 24h. 
     3-4h necesitadas para Docker Django corriendo y docker-compose.
@@ -17,15 +20,18 @@ Recibiendo el mail en español voy a documentar el proyecto en Castellano.
     4h - Funcionalidades básicas, endpoints, views, templates.
     50min documetings
     3h - testing & cleaning
+    
 
 **Dificultades técnicas encontrados ?**
     Celery
 
 **Trade-offs ?**
-    Quería implementar Docker Secrets
+    Quería implementar Docker Secrets 
+    healthchecks & logging over templates and tests.
 
 **What you would add with more time**
     Quería implementar desde imagen base de Alpine
+    Everything
 
 **Justification for using Django templates for the frontend**
     Centralizar Errores y monitoreo asicomo renderizado en servidor

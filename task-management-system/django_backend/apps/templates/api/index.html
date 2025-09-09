@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class=".title">Bienvenido a la pagina Test de Sherpa !</h1>
+<p class=".description">Esta es la unica pagina :( para el sistema de gestion de tareas de Sherpa</p>
+<a href="{% url 'auth-login' %}">Login</a>
+<a href="{% url 'auth-logout' %}">Logout</a>
+<a href="{% url 'user-register' %}">Registro</a>
+<a href="{% url 'auth-refresh' %}">Refresh</a>
+<a href="{% url 'auth-me' %}">Me</a>
+<a href="{% url 'user-list' %}">Lista de usuarios</a>
+<a href="{% url 'user-retrieve' 1 %}">Usuario 1</a>
+<a href="{% url 'user-update' 1 %}">Actualizar Usuario 1</a>
+{% endblock %}

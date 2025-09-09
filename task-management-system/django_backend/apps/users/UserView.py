@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
-from api.serializers.users.UserSerializer import UserSerializer
+from apps.common.serializers.users.UserSerializer import UserSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+#from apps.scripts.logger import get_logger
 
+#logger = get_logger(__name__)
 """
 POST /api/auth/register/ #CreateApiView
 """
@@ -11,6 +13,7 @@ class UserCreate(generics.CreateAPIView):
     serializer_class = UserSerializer
     def perform_create(self, serializer):
         # Create user with hashed password
+        #logger.info(f"UserCreate para usuario: {serializer.validated_data['username']}")
         user = User.objects.create_user(
             username=serializer.validated_data['username'],
             password=serializer.validated_data['password']
@@ -23,6 +26,9 @@ class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        #logger.info(f"UserList para usuario: {self.request.user.username}")
+        return User.objects.all()
 
 
 """
@@ -35,5 +41,6 @@ class UserRetrieveUpdate(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     def get_object(self):
         pk = self.kwargs.get('pk')
+        #logger.info(f"UserRetrieveUpdate para usuario: {pk}")
         return User.objects.get(pk=pk)
 

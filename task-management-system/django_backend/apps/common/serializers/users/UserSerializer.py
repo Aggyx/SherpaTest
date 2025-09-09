@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import User
+from apps.models import User
 """
 https://docs.djangoproject.com/en/5.2/topics/auth/default/#:~:text=user_gains_perms%28request%2C%20user_id%29%3A
 The primary attributes of the default user are:

@@ -1,13 +1,17 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
-from django.contrib.sessions.models import Session
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from api.serializers.auth.LoginSerializer import LoginSerializer
-from api.serializers.users.UserSerializer import UserSerializer
-from importlib import import_module
+from apps.common.serializers.auth.LoginSerializer import LoginSerializer
+from apps.common.serializers.users.UserSerializer import UserSerializer
+# from importlib import import_module
+# from django.contrib.sessions.models import Session
+# from apps.scripts.logger import get_logger
+
+# Initialize logger
+# logger = get_logger(__name__)
 # from django.config.settings import SESSION_ENGINE
 # SessionStore = import_module(SESSION_ENGINE).SessionStore
 
@@ -18,10 +22,14 @@ def login_view(request):
     POST /api/auth/login/
     Login user with username and password
     """
+    #logger.info(f"Intento de login desde IP: {request.META.get('REMOTE_ADDR')}")
+    
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.validated_data['user']
         login(request, user)
+        
+        #logger.info(f"Login exitoso para usuario: {user.username}")
         
         # Return user data
         user_serializer = UserSerializer(user)
@@ -30,6 +38,7 @@ def login_view(request):
             'usuario': user_serializer.data
         }, status=status.HTTP_200_OK)
     
+    #logger.warning(f"Login fallido: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -41,6 +50,8 @@ def logout_view(request):
     Logout current user
     """
     logout(request)
+    #logger.info(f"Logout exitoso para usuario: {request.user.username}")
+    
     return Response({
         'mensaje': 'Logout exitoso'
     }, status=status.HTTP_200_OK)
@@ -54,6 +65,7 @@ def refresh_view(request):
     Refresh session and return current user data
     """
     user_serializer = UserSerializer(request.user)
+    #logger.info(f"Session refreshed for user: {request.user.username}")
     return Response({
         'message': 'Session refreshed',
         'user': user_serializer.data
@@ -67,6 +79,7 @@ def me_view(request):
     Get current user data
     """
     user_serializer = UserSerializer(request.user)
+    #logger.info(f"Me view para usuario: {request.user.username}")
     return Response({
         'user': user_serializer.data
     }, status=status.HTTP_200_OK)

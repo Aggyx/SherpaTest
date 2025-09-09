@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ.get('SECRET_KEY')
+SECRET_KEY = environ.get('DJANGO_SECRET_KEY')
 POSTGRES_DB_NAME = environ.get('POSTGRES_DB_NAME')
 POSTGRES_USER = environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = environ.get('POSTGRES_PASSWORD')
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
+    'apps',
 ]
 
 MIDDLEWARE = [
@@ -142,8 +142,43 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Session settings
+# Session 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 86400  # 24 hours
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_SECURE = False  # True con HTTPS en prod
 SESSION_COOKIE_HTTPONLY = True
+
+# LOGGING = {
+#     "version": 1, 
+#     "disable_existing_loggers": False, 
+#     "formatters": {  # Define estilos de formato
+#         "verbose": {
+#             "format": "[{levelname}] {asctime} {name} {message}",
+#             "style": "{",
+#         },
+#         "simple": {
+#             "format": "[{levelname}] {message}",
+#             "style": "{",
+#         },
+#     },
+#     "handlers": {  # Define gestores de logs
+#         "file": {
+#             "level": "DEBUG",  # Log level
+#             "class": "logging.FileHandler",  # Handler para archivoss
+#             "filename": BASE_DIR / "logs" / "django.log",
+#             "formatter": "verbose",
+#         },
+#         "console": {
+#             "level": "INFO",
+#             "class": "logging.StreamHandler",
+#             "formatter": "simple",
+#         },
+#     },
+#     "loggers": {  # Define loggers
+#         "django": {
+#             "handlers": ["file", "console"], 
+#             "level": "DEBUG",  # Log all messages (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+#             "propagate": True,
+#         },
+#     },
+# }
