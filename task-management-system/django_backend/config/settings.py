@@ -81,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': POSTGRES_DB_NAME or 'task_management_db',
-        'USER': POSTGRES_USER or 'postgres',
-        'PASSWORD': POSTGRES_PASSWORD or 'postgres123',
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
         'HOST': 'database_postgres', #IP o nombre del contenedor
-        'PORT': POSTGRES_PORT or '5432',
+        'PORT': '5432',  # PostgreSQL por defecto corre en el puerto 5432
         'OPTIONS': {
             'connect_timeout': 10,
         }

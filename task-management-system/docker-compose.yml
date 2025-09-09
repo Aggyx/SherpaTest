@@ -41,7 +41,7 @@ services:
       - .env.sample
     image: postgres:15
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "${POSTGRES_PORT}:5432"
     networks:
       - backend_network
     volumes:
