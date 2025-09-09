@@ -57,11 +57,11 @@ def logout_view(request):
     }, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def refresh_view(request):
     """
-    GET /api/auth/refresh/
+    POST /api/auth/refresh/
     Refresh session and return current user data
     """
     user_serializer = UserSerializer(request.user)
@@ -71,11 +71,12 @@ def refresh_view(request):
         'user': user_serializer.data
     }, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def me_view(request):
     """
-    GET /api/auth/me/
+    GET /api/users/me/
     Get current user data
     """
     user_serializer = UserSerializer(request.user)
