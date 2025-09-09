@@ -42,8 +42,11 @@ Desafortunadamente no he tenido tiempo de desplegar Redis y Celery.
 ### GET /api/users/me/
 
 **View /**
-### GET / -> template simplisssimo
-
+### GET / -> index template
+### GET /web/login -> Login rendering template
+### GET /web/logout
+### GET /web/users/
+### GET /web/refresh
 **Panel admin**
 ### GET /admin/
 
