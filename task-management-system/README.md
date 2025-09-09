@@ -10,17 +10,18 @@ Commandos útiles:
 - docker-compose exec [container] [command]
 - docker-compose up
 
-He escogido una imagen de postgres versión 15. El enunciado no menciona un Dockerfile para otro servicio dedicado a la base de datos. Implica que no nos hace falta predefinir usuarios roles y tablas ya que django lo hace muy bien con sus Views.
+He escogido una imagen de postgres versión 15. El enunciado no menciona un Dockerfile para otro servicio dedicado a la base de datos. Implica que no nos hace falta predefinir usuarios roles y tablas ya que django lo hace muy bien con sus Migraciones.
 
 El proyecto de Django se encuentra en django_backend:
 - config/ -> principal archivos de configuración de Django
-- api/ -> mi aplicación restframework con endpoints sobre los modelos.
+- api/ -> aplicación restframework con endpoints sobre los modelos.
 - entrypoint.sh -> script de inicio, configura contenedor Django.
 
-
-## Quick Start
+## Para lanzarlo
 ```bash
 git clone <repo>
 cd task-management-system
 cp .env.sample .env
 docker-compose up
+```
+Visita la página en http://localhost:puerto
