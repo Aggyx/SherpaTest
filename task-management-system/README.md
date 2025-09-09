@@ -1,5 +1,7 @@
 # Task Management System
 Bienvenidos al repositorio, aquí encontrareís mi entrega a la candidatura de Junior Python Developper.
+He llegado al punto 3 y algo de 5. 
+He estado al tanto 1 dia y media antes de la entrega
 
 ## Para lanzarlo
 ```bash
@@ -9,6 +11,7 @@ cp .env.sample .env
 docker-compose up
 ```
 Visita la página en http://localhost:7777
+
 
 Commandos útiles:
 - docker ps
