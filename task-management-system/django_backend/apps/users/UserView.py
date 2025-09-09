@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from apps.common.serializers.users.UserSerializer import UserSerializer
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 #from apps.scripts.logger import get_logger
 
 #logger = get_logger(__name__)
@@ -11,6 +11,7 @@ POST /api/auth/register/ #CreateApiView
 class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
     def perform_create(self, serializer):
         # Create user with hashed password
         #logger.info(f"UserCreate para usuario: {serializer.validated_data['username']}")

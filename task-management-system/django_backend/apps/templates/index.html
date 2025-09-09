@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto; padding: 20px; text-align: center;">
+    <h1 class="title" style="color: #333; margin-bottom: 20px;">Bienvenido a la página Test de Sherpa!</h1>
+    <p class="description" style="color: #666; margin-bottom: 40px; font-size: 18px;">Sistema de gestión de tareas de Sherpa</p>
+    
+    <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 30px; margin-bottom: 30px;">
+        <h2 style="color: #333; margin-bottom: 20px;">Acceso Web</h2>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'web-login' %}" style="display: inline-block; padding: 12px 24px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Iniciar Sesión
+            </a>
+            <a href="{% url 'web-register' %}" style="display: inline-block; padding: 12px 24px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Registrarse
+            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'web-user-list' %}" style="display: inline-block; padding: 12px 24px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                    Lista de Usuarios
+                </a>
+                <a href="{% url 'web-logout' %}" style="display: inline-block; padding: 12px 24px; background: #dc3545; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                    Cerrar Sesión
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div style="background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #333; margin-bottom: 15px;">API Endpoints</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; text-align: left;">
+            <a href="{% url 'auth-login' %}" style="color: #007bff; text-decoration: none; padding: 5px;">POST /api/auth/login/</a>
+            <a href="{% url 'auth-logout' %}" style="color: #007bff; text-decoration: none; padding: 5px;">POST /api/auth/logout/</a>
+            <a href="{% url 'user-register' %}" style="color: #007bff; text-decoration: none; padding: 5px;">POST /api/auth/register/</a>
+            <a href="{% url 'auth-refresh' %}" style="color: #007bff; text-decoration: none; padding: 5px;">POST /api/auth/refresh/</a>
+            <a href="{% url 'user-me' %}" style="color: #007bff; text-decoration: none; padding: 5px;">GET /api/users/me/</a>
+            <a href="{% url 'user-list' %}" style="color: #007bff; text-decoration: none; padding: 5px;">GET /api/users/</a>
+            <a href="{% url 'user-retrieve' 1 %}" style="color: #007bff; text-decoration: none; padding: 5px;">GET /api/users/1/</a>
+            <a href="{% url 'user-update' 1 %}" style="color: #007bff; text-decoration: none; padding: 5px;">PUT /api/users/1/</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -11,4 +11,4 @@ class IndexView(View):
         GET /
         Render the main index page
         """
-        return render(request, 'api/index.html')
+        return render(request, 'index.html')

@@ -1,6 +1,7 @@
 from django.urls import path
 from .users.UserView import UserCreate, UserList, UserRetrieveUpdate
 from .users.AuthView import login_view, logout_view, refresh_view, me_view
+from .users.WebViews import login_web_view, register_web_view, user_list_web_view, logout_web_view
 """
 Authentication Endpoints:
 POST /api/auth/register/
@@ -25,4 +26,10 @@ urlpatterns = [
     path('auth/login/', login_view, name='auth-login'), #Allow Any
     path('auth/logout/', logout_view, name='auth-logout'), #IsAuthenticated
     path('auth/refresh/', refresh_view, name='auth-refresh'), #IsAuthenticated
+    
+    # Web views
+    path('web/login/', login_web_view, name='web-login'),
+    path('web/register/', register_web_view, name='web-register'),
+    path('web/users/', user_list_web_view, name='web-user-list'),
+    path('web/logout/', logout_web_view, name='web-logout'),
 ]
